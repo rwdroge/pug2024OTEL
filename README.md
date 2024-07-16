@@ -103,7 +103,7 @@ Now that we have our Agent key file that contains the secret and server configur
 As discussed during the presentation, you can setup tracing for both ABL Clients and PASOE instances.
 For any ABL Client, we can add the *-otelConfig* parameter, followed by the file name that contains the OpenTelemetry configuration.
 
-In the tracing/conf folder of this project, you will find a sample configuration file that can be refered to in either the .pf file for an ABL Client or as a new option *otelConfigFile* in the openedge.properties file in the [AppServer.SessMgr] sections for PASOE.
+In the *conf/tracing* folder of this project, you will find a sample configuration file that can be refered to in either the .pf file for an ABL Client or as a new option *otelConfigFile* in the openedge.properties file in the [AppServer.SessMgr] sections for PASOE.
 
 Open the [Jaeger UI](http://localhost:16686/).
 

@@ -1,0 +1,25 @@
+{
+"OpenTelemetryConfiguration": {
+    "exporters": {
+        "otlp": {
+            "grpc": [
+                {
+                    "endpoint": "http://localhost:5317",
+                    "span_processor": "batch",
+                    "batch_processor_options": {
+                    "max_queue_size": 500
+                }                
+            }
+        ]
+    }
+    }
+},
+"OpenEdgeTelemetryConfiguration": {
+    "trace_procedures": "*",
+    "trace_requires_parent": true,
+    "trace_abl_transactions": true,
+    "trace_request_start": true
+    }
+}
+
+261
