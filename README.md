@@ -86,7 +86,7 @@ Now that we have our Agent key file that contains the secret and server configur
 5. Change the Java directory to: <JavaDir> and leave other options as-is and choose **Next**
 6. In the Server Connections section, select the earlier saved Agent Key file by clicking the **Choose..** button
 7. Select the Agent Key file and choose **Open**
-> Note that all other fields are automatically filled after selecting the Agent Key file
+> [!NOTE] All other fields are automatically filled after selecting the Agent Key file
 8. Choose **Next**
 9. Select the OpenEdge Installation directory (DLC) and choose **Next**
 10. Review the installation info and choose **Install**
@@ -94,17 +94,20 @@ Now that we have our Agent key file that contains the secret and server configur
 
 > [!TIP]
 > You can stop and start the OECC Agent as a Windows Service  
-> For troubleshooting, you can find the OECC Agent log files in *C:\Progress\OECC_Agent* 
-
-
+> For troubleshooting, you can find the OECC Agent log files in *C:\Progress\OECC_Agent\logs* 
 
 
 
 ## OpenTelemetry Tracing
 
+As discussed during the presentation, you can setup tracing for both ABL Clients and PASOE instances.
+For any ABL Client, we can add the *-otelConfig* parameter, followed by the file name that contains the OpenTelemetry configuration.
+
+In the tracing/conf folder of this project, you will find a sample configuration file that can be refered to in either the .pf file for an ABL Client or as a new option *otelConfigFile* in the openedge.properties file in the [AppServer.SessMgr] sections for PASOE.
+
 Open the [Jaeger UI](http://localhost:16686/).
 
-Notice that your traces in the 'Service' dropdown selection box is now showing 'empty-service-name' for your traces.
+Notice that your traces in the 'Service' dropdown selection box is now showing '*empty-service-name*' for your traces.
 
 Obviously this is not very useful as it will be hard to recognize where traces are coming from if they are all refering to the same 'empty-service-name'.
 
