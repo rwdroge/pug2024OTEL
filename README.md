@@ -1,5 +1,4 @@
-# pug2024OTEL
-EMEA PUG 2024 OpenEdge OpenTelemetry Workshop
+# EMEA PUG 2024 OpenEdge OpenTelemetry Workshop
 
 ## Your Workshop Environment
 
@@ -46,15 +45,42 @@ The Docker Compose command will start a full environment that has configured run
 - [Prometheus](https://prometheus.io/) (Monitoring system and time series database)
 - [Grafana](https://grafana.com/) (Observability platform: query, visualize and alert on metrics)
 
+## Let's get it Started!
+
+#### Tasks:
+1. On your machine open CMD and navigate to your workshop directory ("c:\workshop")
+```
+cd c:\workshop
+```
+2. Clone this project into the workshop directory
+```
+git clone https://github.com/rwdroge/pug2024OTEL.git
+```
+
+
+
 ## OpenTelemetry Metrics
 
 We will start this workshop by collecting Metrics in the OpenTelemetry standard for both a PASOE instance and a RDBMS instance.
 As mentioned earlier during the presentation, we can use an OpenEdge Command Center Agent to do this for us.
-We don't need an OpenEdge Command Center Server installation for this to work, but we have [configured one for you](https://localhost:8000) nonetheless.
+We don't need an OpenEdge Command Center Server installation for this to work, but we have configured one for you nonetheless.
 
-The OpenEdge Command Center Agent can be installed using a silent or interactive installer, but it can also be deployed using a set of configuration files (i.e. ideal for Docker deployments). Today we will use the 'normal' Windows installation method. We've already downloaded the latest version from ESD for you and 
+The OpenEdge Command Center Agent can be installed using a silent or interactive installer, but it can also be deployed using a set of configuration files (i.e. ideal for Docker deployments). Today we will use the 'normal' Windows installation method. We've already downloaded the latest version from ESD for you and put that into the binaries folder.
 
-c:\workshop\binaries
+OpenEdge Command Center works with a Agent Key so that only verified Agents can connect to the Command Center Server.
+You can create and export an Agent key from the [Command Center Console](https://localhost:8000):
+
+- Go to the 'Agent Keys' menu item
+- Click the 'Generate Agent Keys' button to create a new Agent Key
+- Either accept the default key name or change it and choose 'Save'
+- In the next screen, choose 'Download Key File'
+- Save the Agent Key file in the c:\workshop\
+
+Now that we have our Agent key file that contains the secret and server configuration details, it's time to go ahead with the installation of the Command Center Agent!
+
+
+
+
 
 
 ## OpenTelemetry Tracing
@@ -78,7 +104,7 @@ By adding the following to the existing JSON configuration file for PASOE, we ca
 
 Of course, it makes sense to do something similar for the ABL client OpenTelemetry configuration as well, you will just change the 'Location' to reflect that this is not coming from PASOE but from a client.
 
-### Tasks:
+#### Tasks:
 1. Add the additional resource attributes to the OpenTelemetry configuration files for both PASOE and the ABL Client
 2. Restart the ABL Client and PASOE instance
 3. Rerun the requests from the ABL Client
