@@ -22,14 +22,14 @@ Because setting up all of these products and their configurations is far outside
 
 > [!TIP]
 > You can stop/start this whole 'oTel stack' at any time with the following commands (executed on command line from the base directory of this workshop):
-- Stop
-```
-docker compose down
-```
-- Start
-```
-docker compose up
-```
+> - Stop
+> ```
+> docker compose down
+> ```
+> - Start
+> ```
+> docker compose up
+> ```
 
 The Docker Compose command will start a full environment that has configured and running instance of:
 
