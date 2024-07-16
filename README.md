@@ -6,38 +6,48 @@ EMEA PUG 2024 OpenEdge OpenTelemetry Workshop
 This repository will contain all of the resources required to be able to perform all tasks.
 We have Windows environments in the cloud setup for you to use, you will receive connection information from your workshop hosts.
 
+
 If you want to perform this workshop on your own laptop, make sure to have at least installed:
 
 * OpenEdge 12.8.3 (PASOE, Database, Client-Networking, PDSOE)
 * Docker (Desktop)
+* Git
+* OpenEdge Command Center Server (optional) 
+* Postman (optional)
+* cURL (optional)
 
 ## APM Choices
 
 There are quite some APM (Application Performance Monitoring) offerings available on the market, both open source and commercialy.
 We will use a centralized cloud instance of NewRelic to capture your progress in today's workshop and metrics from all of your PASOE instances.
 
-Next to that, for your own excercises we decided to also use a combination of open source projects/products, all of them are at least included within the [CNCF](https://www.cncf.io/projects/) to collect, prepare and visualize the metrics and tracing data.
+Next to that, for your own excercises we decided to also use a combination of open source projects/products, all of them are at least included within the [CNCF](https://www.cncf.io/projects/) (Cloud Native Computing Foundation)  to collect, prepare and visualize the metrics and tracing data.
 
 Because setting up all of these products and their configurations is far outside of the scope of this workshop, we decided to use Docker (Compose) to compose all of these applications and have an easy way to stop and start all of those by a single command.
 
 > [!TIP]
-> You can stop/start this whole 'oTel stack' at any time with the following commands (executed on command line from the base directory of this workshop):
-> - Stop
+> You can stop/start the whole 'OpenTelemetry stack' at any time with the following commands (executed on command line from the base directory of this workshop):
+> Stop
 > ```
-> docker compose down
+> docker compose down -d
 > ```
-> - Start
+> Start
 > ```
-> docker compose up
+> docker compose up -d
 > ```
 
-The Docker Compose command will start a full environment that has configured and running instance of:
+The Docker Compose command will start a full environment that has configured running instances of:
 
 - [oTel Collector](https://opentelemetry.io/docs/collector/) (the official OpenTelemetry Collector)
 - [Jaeger](https://www.jaegertracing.io/) (Distributed Tracing System)
 - [Prometheus](https://prometheus.io/) (Monitoring system and time series database)
 - [Grafana](https://grafana.com/) (Observability platform: query, visualize and alert on metrics)
 
+## OpenTelemetry Metrics
+
+We will start this workshop by collecting Metrics in the OpenTelemetry standard for both a PASOE instance and a RDBMS instance.
+As mentioned earlier during the presentation, we can use an OpenEdge Command Center Agent to do this for us.
+We don't need an OpenEdge Command Center Server installation for this to work, but we have set one for you up nonetheless
 
 ## OpenTelemetry Tracing
 
