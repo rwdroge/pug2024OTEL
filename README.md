@@ -15,7 +15,7 @@ If you want to perform this workshop on your own laptop, make sure to have at le
 * cURL (optional)
 
 > [!TIP]
-> All installers and binaries required for this workshop can be found on the Workshop VM's in the c:\workshop\binaries folder.
+> All installers and binaries required for this workshop can be found on the Workshop VM's in the *c:\workshop\binaries* folder.
 > When using your own local machine you can either download these yourself or ask your workshop owners for a copy 
 
 ## APM Choices
@@ -29,11 +29,12 @@ Because setting up all of these products and their configurations is far outside
 
 > [!TIP]
 > You can stop/start the whole 'OpenTelemetry stack' at any time with the following commands (executed on command line from the base directory of this workshop):
-> Stop
+
+> **Stop**
 > ```
 > docker compose down -d
 > ```
-> Start
+> **Start**
 > ```
 > docker compose up -d
 > ```
@@ -53,9 +54,9 @@ The Docker Compose command will start a full environment that has configured run
 > cd c:\workshop
 > ```
 2. Clone this project into the workshop directory
-```
-git clone https://github.com/rwdroge/pug2024OTEL.git
-```
+> ```
+> git clone https://github.com/rwdroge/pug2024OTEL.git
+> ```
 
 
 
@@ -78,6 +79,9 @@ You can create and export an Agent key from the [Command Center Console](https:/
 
 Now that we have our Agent key file that contains the secret and server configuration details, it's time to go ahead with the installation of the Command Center Agent!
 
+#### Tasks:
+1. Create and download an Agent Key file that we can use for the OpenEdge Command Center Agent installation
+2. Start the OpenEdge Command Center Agent Installer (PROGRESS_OECC_AGENT_1.3.0_WIN_64.exe)
 
 
 
