@@ -33,10 +33,10 @@ Because setting up all of these products and their configurations is far outside
 
 The Docker Compose command will start a full environment that has configured and running instance of:
 
-- oTel Collector (the official OpenTelemetry Collector)
-- Jaeger (Distributed Tracing System)
-- Prometheus (Monitoring system and time series database)
-- Grafana (Query and visualize metrics)
+- [oTel Collector](https://opentelemetry.io/docs/collector/) (the official OpenTelemetry Collector)
+- [Jaeger](https://www.jaegertracing.io/) (Distributed Tracing System)
+- [Prometheus](https://prometheus.io/) (Monitoring system and time series database)
+- [Grafana](https://grafana.com/) (Observability platform: query, visualize and alert on metrics)
 
 
 ## OpenTelemetry Tracing
