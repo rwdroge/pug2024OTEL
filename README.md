@@ -49,9 +49,9 @@ The Docker Compose command will start a full environment that has configured run
 
 #### Tasks:
 1. On your machine open CMD and navigate to your workshop directory ("c:\workshop")
-```
-cd c:\workshop
-```
+> ```
+> cd c:\workshop
+> ```
 2. Clone this project into the workshop directory
 ```
 git clone https://github.com/rwdroge/pug2024OTEL.git
