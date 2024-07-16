@@ -6,7 +6,6 @@ EMEA PUG 2024 OpenEdge OpenTelemetry Workshop
 This repository will contain all of the resources required to be able to perform all tasks.
 We have Windows environments in the cloud setup for you to use, you will receive connection information from your workshop hosts.
 
-
 If you want to perform this workshop on your own laptop, make sure to have at least installed:
 
 * OpenEdge 12.8.3 (PASOE, Database, Client-Networking, PDSOE)
@@ -15,6 +14,10 @@ If you want to perform this workshop on your own laptop, make sure to have at le
 * OpenEdge Command Center Server (optional) 
 * Postman (optional)
 * cURL (optional)
+
+> [!TIP]
+> All installers and binaries required for this workshop can be found on the Workshop VM's in the c:\workshop\binaries folder.
+> When using your own local machine you can either download these yourself or ask your workshop owners for a copy 
 
 ## APM Choices
 
@@ -47,7 +50,12 @@ The Docker Compose command will start a full environment that has configured run
 
 We will start this workshop by collecting Metrics in the OpenTelemetry standard for both a PASOE instance and a RDBMS instance.
 As mentioned earlier during the presentation, we can use an OpenEdge Command Center Agent to do this for us.
-We don't need an OpenEdge Command Center Server installation for this to work, but we have set one for you up nonetheless
+We don't need an OpenEdge Command Center Server installation for this to work, but we have [configured one for you](https://localhost:8000) nonetheless.
+
+The OpenEdge Command Center Agent can be installed using a silent or interactive installer, but it can also be deployed using a set of configuration files (i.e. ideal for Docker deployments). Today we will use the 'normal' Windows installation method. We've already downloaded the latest version from ESD for you and 
+
+c:\workshop\binaries
+
 
 ## OpenTelemetry Tracing
 
