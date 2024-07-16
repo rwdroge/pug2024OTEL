@@ -29,7 +29,6 @@ Because setting up all of these products and their configurations is far outside
 
 > [!TIP]
 > You can stop/start the whole 'OpenTelemetry stack' at any time with the following commands (executed on command line from the base directory of this workshop):
-
 > **Stop**
 > ```
 > docker compose down -d
