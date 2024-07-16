@@ -27,7 +27,7 @@ Next to that, for your own excercises we decided to also use a combination of op
 
 Because setting up all of these products and their configurations is far outside of the scope of this workshop, we decided to use Docker (Compose) to compose all of these applications and have an easy way to stop and start all of those by a single command.
 
-> [!TIP]
+> [!NOTE]
 > You can stop/start the whole 'OpenTelemetry stack' at any time with the following commands (executed on command line from the base directory of this workshop):  
 > **Stop**
 > ```
@@ -79,8 +79,22 @@ You can create and export an Agent key from the [Command Center Console](https:/
 Now that we have our Agent key file that contains the secret and server configuration details, it's time to go ahead with the installation of the Command Center Agent!
 
 #### Tasks:
-1. Create and download an Agent Key file that we can use for the OpenEdge Command Center Agent installation
+1. Create and download an Agent Key file that you can use during the OpenEdge Command Center Agent installation
 2. Start the OpenEdge Command Center Agent Installer (PROGRESS_OECC_AGENT_1.3.0_WIN_64.exe)
+3. Click Next in the Introduction section
+4. Accept the License Agreement and choose Next
+5. Change the Java directory to: <JavaDir> and leave other options as-is and choose Next
+6. In the Server Connections section, select the earlier saved Agent Key file by clicking the Choose.. button
+7. Select the Agent Key file and choose Open
+> Note that all other fields are automatically filled after selecting the Agent Key file
+8. Choose Next
+9. Select the OpenEdge Installation directory (DLC) and choose Next
+10. Review the installation info and choose Install
+11. Choose Done
+
+> [!TIP]
+> You can stop and start the OECC Agent as a Windows Service
+> For troubleshooting, you can find the OECC Agent log files in the C:\Progress\OECC_Agent directory
 
 
 
