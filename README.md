@@ -28,7 +28,7 @@ Next to that, for your own excercises we decided to also use a combination of op
 Because setting up all of these products and their configurations is far outside of the scope of this workshop, we decided to use Docker (Compose) to compose all of these applications and have an easy way to stop and start all of those by a single command.
 
 > [!TIP]
-> You can stop/start the whole 'OpenTelemetry stack' at any time with the following commands (executed on command line from the base directory of this workshop):
+> You can stop/start the whole 'OpenTelemetry stack' at any time with the following commands (executed on command line from the base directory of this workshop):  
 > **Stop**
 > ```
 > docker compose down -d
