@@ -1,0 +1,43 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+  otlp/withendpoint:
+    protocols:
+      grpc:
+        endpoint: localhost:4318
+
+exporters:
+  logging:
+    loglevel: debug
+  file:
+    path: c:\temp\export.json
+  otlp/elastic: 
+    endpoint: localhost:8200
+    compression: none
+    tls:
+        insecure: true
+  otlp/relic:
+    endpoint: otlp.eu01.nr-data.net:4318
+    headers:
+        api-key: <api_key_newrelic>
+#    insecure: true
+#    headers:
+#     Authorization: "BEARER AZERTYUIOP"
+#   tls:
+#    insecure: true
+    
+
+processors:
+  batch:
+service:
+  pipelines:
+    traces:
+      receivers: [otlp, otlp/withendpoint]
+#      exporters: [logging, otlp/elastic]
+      exporters: [logging, otlp/elastic, otlp/relic]
+    metrics:
+      receivers: [otlp, otlp/withendpoint]
+#      exporters: [logging, file, otlp/elastic]     
+      exporters: [logging, file, otlp/elastic, otlp/relic]
