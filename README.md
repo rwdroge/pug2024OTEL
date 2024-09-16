@@ -42,8 +42,10 @@ The Docker Compose command will start a full environment that has configured run
 
 - [oTel Collector](https://opentelemetry.io/docs/collector/) (the official OpenTelemetry Collector)
 - [Jaeger](https://www.jaegertracing.io/) (Distributed Tracing System)
+-> http://localhost:16686
 - [Prometheus](https://prometheus.io/) (Monitoring system and time series database)
 - [Grafana](https://grafana.com/) (Observability platform: query, visualize and alert on metrics)
+-> http://localhost:3000 
 
 ## Let's get it Started!
 
