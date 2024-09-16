@@ -81,14 +81,17 @@ You can create and export an Agent key from the [Command Center Console](https:/
 Now that we have our Agent key file that contains the secret and server configuration details, it's time to go ahead with the installation of the Command Center Agent!
 
 #### Tasks:
+> only when using OpenEdge Command Center Server
 1. Create and download an Agent Key file that you can use during the OpenEdge Command Center Agent installation
 2. Start the OpenEdge Command Center Agent Installer (PROGRESS_OECC_AGENT_1.3.0_WIN_64.exe)
 3. Click **Next** in the Introduction section
 4. Accept the License Agreement and choose **Next**
 5. Change the Java directory to: <JavaDir> and leave other options as-is and choose **Next**
+> only when using OpenEdge Command Center Server
 6. In the Server Connections section, select the earlier saved Agent Key file by clicking the **Choose..** button
 7. Select the Agent Key file and choose **Open**
 > [!NOTE] All other fields are automatically filled after selecting the Agent Key file
+> otherwise it's not important what values you enter here
 8. Choose **Next**
 9. Select the OpenEdge Installation directory (DLC) and choose **Next**
 10. Review the installation info and choose **Install**
@@ -98,7 +101,49 @@ Now that we have our Agent key file that contains the secret and server configur
 > You can stop and start the OECC Agent as a Windows Service  
 > For troubleshooting, you can find the OECC Agent log files in *C:\Progress\OECC_Agent\logs* 
 
+### Setting up NewRelic for collecting traces and metrics
 
+- Create a user account in NewRelic https://newrelic.com/ 
+- Login to the account and create an insert API key  
+- Click on the username link in the bottom left corner. It will show "API Keys" link 
+- Click on "API Keys" link to navigate to API keys page 
+- Click on "Insights insert keys" link right side options pane  
+- Click on the plus icon next to the Insert Keys heading 
+- Give a short description of the key and click on the "Save Your Notes" button to create insert API key 
+
+- Use the insert key in the collector configuration file to receive the telemetry data in NewRelic  
+- Select the traces menu in the left side pane in NewRelic homepage, it will redirect to the traces page where you can see the trace information.
+
+### Using an opensource stack
+
+#### Tasks
+- Download and install Grafana
+> Grafana should be running after installation, otherwise you can start/stop it as Windows Service
+ 
+- Download and install oTel Collector
+- Download and install Jaeger
+- Start  jaeger
+>```
+>
+> ```
+- Download and install Prometheus
+- Start Prometheus (from installation directory)
+> ```
+> prometheus
+>```
+
+(Or use the docker compose file to start the full stack with one command :))
+
+
+
+#### Tasks
+
+- Open Grafana (http://localhost:3000) and login
+- In the left-side menu choose 'Data sources'
+- Add Data source of type 'Prometheus'
+- Enter the Prometheus URL (http://localhost:9090)
+- Choose 'Save & Test'
+> You should receive acknowledgement that the Prometheus API was queried successfully
 
 ## OpenTelemetry Tracing
 
@@ -131,3 +176,4 @@ Of course, it makes sense to do something similar for the ABL client OpenTelemet
 2. Restart the ABL Client and PASOE instance
 3. Rerun the requests from the ABL Client
 4. Check Jaeger again and compare with before to verify your changes
+
