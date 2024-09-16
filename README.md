@@ -127,7 +127,7 @@ Now that we have our Agent key file that contains the secret and server configur
 >
 > ```
 - Download and install Prometheus
-- Start Prometheus (from installation directory)
+- Start Prometheus (from installation directory, it uses the prometheus.yaml file for configuration)
 > ```
 > prometheus
 >```
