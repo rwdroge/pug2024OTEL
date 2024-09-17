@@ -7,7 +7,7 @@ We have Windows environments in the cloud setup for you to use, you will receive
 
 If you want to perform this workshop on your own laptop, make sure to have at least installed:
 
-* OpenEdge 12.8.3 (PASOE, Database, Client-Networking, PDSOE)
+* OpenEdge 12.8.x (PASOE, Database, Client-Networking, PDSOE)
 * Docker (Desktop)
 * Git
 * OpenEdge Command Center Server (optional) 
@@ -21,7 +21,7 @@ If you want to perform this workshop on your own laptop, make sure to have at le
 ## APM Choices
 
 There are quite some APM (Application Performance Monitoring) offerings available on the market, both open source and commercialy.
-We will use a centralized cloud instance of NewRelic to capture your progress in today's workshop and metrics from all of your PASOE instances.
+Today we will use the centralized cloud instance of NewRelic to capture your progress in today's workshop and metrics from all of your PASOE instances.
 
 Next to that, for your own excercises we decided to also use a combination of open source projects/products, all of them are at least included within the [CNCF](https://www.cncf.io/projects/) (Cloud Native Computing Foundation)  to collect, prepare and visualize the metrics and tracing data.
 
@@ -46,6 +46,8 @@ The Docker Compose command will start a full environment that has configured run
 - [Prometheus](https://prometheus.io/) (Monitoring system and time series database)
 - [Grafana](https://grafana.com/) (Observability platform: query, visualize and alert on metrics)
 -> http://localhost:3000 
+
+If you don't have docker and docker compose installed on your laptop, there will be short instructions (if you want to know more, RTFM :)) later on to just download and install the binaries for these solutions and make the whole stack run that way.
 
 ## Let's get it Started!
 
@@ -101,6 +103,25 @@ Now that we have our Agent key file that contains the secret and server configur
 > You can stop and start the OECC Agent as a Windows Service  
 > For troubleshooting, you can find the OECC Agent log files in *C:\Progress\OECC_Agent\logs* 
 
+The OECC Agent will pick up PAS instances linked to the OpenEdge installation automatically, but for the OpenTelemetry Metrics to be collected, one should edit the 'otagentpasoe.yaml' file, which can be found in the conf folder of the OECC Agent installation.
+In that file we will define which PASOE instances we want to collect metrics for.
+
+Next to that, there's also the 'otagentoedb.yaml' file, which is the configuration file for the OpenEdge database(s) that you want to collect metrics for.
+
+Apart from the database details, there's also a line in this file that tells to which endpoint we will be sending the metrics to.
+In this case it's linked to the oTel Collector that's going to collect these metrics and in turn send these to endpoints of APM's (each APM solution will have documented on how to setup the OpenTelemetry collector with their product, super helpful!)
+
+Have a look at both the .yaml files in the oecc_agent folder of this repository and perform the following tasks:
+
+#### Tasks:
+
+- Decide which PASOE instances and databases you want to start collecting metrics for
+- Edit 'otagentpasoe.yaml' and add all the PASOE instances that you want to track
+- Do a similar thing for the databases
+
+So, we made sure that we are collecting metrics for those components we want to track, now we need to make sure that those metrics are sent somewhere that can make sense out of the data.
+
+
 ### Setting up NewRelic for collecting traces and metrics
 
 - Create a user account in NewRelic https://newrelic.com/ 
@@ -120,7 +141,6 @@ Now that we have our Agent key file that contains the secret and server configur
 - Download and install Grafana
 > Grafana should be running after installation, otherwise you can start/stop it as Windows Service
  
-- Download and install oTel Collector
 - Download and install Jaeger
 - Start  jaeger
 >```
