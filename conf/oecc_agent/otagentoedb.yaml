@@ -1,0 +1,18 @@
+exporter:
+  name: "otlp"
+  endpoint: "http://localhost:4317"
+  protocol: "grpc"
+  connectionretry: 20
+  timeout: 10
+  
+oedbInstances:
+  -  dbname: <db_name>
+     host: <server_name>
+     port: <db_broker_port>
+     user: <user_with_elevated_rights>
+     password: <password>
+     metricsregex: 
+     otherdbconnparams: 
+     dbconnectionretry: 5
+     dbschedule: 30
+     dbduration: seconds

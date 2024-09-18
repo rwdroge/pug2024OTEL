@@ -1,0 +1,23 @@
+{
+    "OpenTelemetryConfiguration": {
+           "exporters": {
+                "otlp": {
+                    "grpc": [
+                    {
+                        "endpoint": "<endpoint>",
+                        "span_processor": "simple"
+                    }
+                    ]
+            }
+          }
+        },
+        "OpenEdgeTelemetryConfiguration": {
+            "trace_procedures": "*",
+            "trace_classes": "*",
+            "trace_abl_transactions": true,
+            "trace_requires_parent": true,
+            "trace_request_start": true
+    
+    
+        }
+    }

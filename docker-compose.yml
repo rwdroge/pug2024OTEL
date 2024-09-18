@@ -1,0 +1,46 @@
+version: '3.4'
+volumes:
+  prometheus-data:
+  grafana-data:
+
+services:
+       
+  # Collector
+  collector:
+    restart: always  
+    image: otel/opentelemetry-collector:latest
+    # command: ["--config=/conf/collector-config.yaml"]
+    volumes:
+      - ./conf/grafana_prometheus_otel.yaml:/etc/otelcol/config.yaml
+    ports:
+      - "9464:9464"
+      - "4317:4317"
+      - "4318:4318"
+
+  # Prometheus
+  prometheus:
+    restart: always  
+    image: prom/prometheus:latest
+    volumes:
+      - ./oTelCollector/conf/prometheus.yaml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+
+  # Grafana
+  grafana:
+    restart: always  
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    volumes:
+    - grafana-data:/var/lib/grafana
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.35
+    container_name: jaeger
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - "5317-5318:4317-4318"
+      - "16685-16686:16685-16686"
