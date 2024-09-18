@@ -28,7 +28,7 @@ Next to that, for your own excercises we decided to also use a combination of op
 Because setting up all of these products and their configurations is far outside of the scope of this workshop, we decided to use Docker (Compose) to compose all of these applications and have an easy way to stop and start all of those by a single command.
 
 > [!NOTE]
-> You can stop/start the whole 'OpenTelemetry stack' at any time with the following commands (executed on command line from the base directory of this workshop):  
+> You can stop/start the whole 'OpenTelemetry metrics stack' at any time with the following commands (executed on command line from the *grafana* folder of this workshop):  
 > **Stop**
 > ```
 > docker compose down -d
@@ -41,13 +41,30 @@ Because setting up all of these products and their configurations is far outside
 The Docker Compose command will start a full environment that has configured running instances of:
 
 - [oTel Collector](https://opentelemetry.io/docs/collector/) (the official OpenTelemetry Collector)
-- [Jaeger](https://www.jaegertracing.io/) (Distributed Tracing System)
--> http://localhost:16686
 - [Prometheus](https://prometheus.io/) (Monitoring system and time series database)
 - [Grafana](https://grafana.com/) (Observability platform: query, visualize and alert on metrics)
 -> http://localhost:3000 
 
+> [!NOTE]
+> You can also start an alternative for distributed tracing (executed on command line from the *jaeger* folder of this workshop):  
+> **Stop**
+> ```
+> docker compose down -d
+> ```
+> **Start**
+> ```
+> docker compose up -d
+> ```
+
+The Docker Compose command will start a full environment that has configured running instances of:
+
+- [oTel Collector](https://opentelemetry.io/docs/collector/) (the official OpenTelemetry Collector)
+- [Jaeger](https://www.jaegertracing.io/) 
+-> (https://localhost:16686)
+
 If you don't have docker and docker compose installed on your laptop, there will be short instructions (if you want to know more, RTFM :)) later on to just download and install the binaries for these solutions and make the whole stack run that way.
+
+Make sure to bring one stack down before using the other, because of possible port conflicts.
 
 ## Let's get it Started!
 
@@ -162,8 +179,7 @@ For the first exercise, we only want to export the metrics to the NewRelic endpo
 > prometheus
 >```
 
-(Or use the docker compose file to start the full stack with one command :))
-
+If you want to use the Docker stack for the metrics, do the following
 
 
 #### Tasks

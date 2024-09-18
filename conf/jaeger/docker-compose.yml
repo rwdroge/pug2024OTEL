@@ -17,25 +17,6 @@ services:
       - "4317:4317"
       - "4318:4318"
 
-  # Prometheus
-  prometheus:
-    restart: always  
-    image: prom/prometheus:latest
-    volumes:
-      - ./oTelCollector/conf/prometheus.yaml:/etc/prometheus/prometheus.yml
-      - prometheus-data:/prometheus
-    ports:
-      - "9090:9090"
-
-  # Grafana
-  grafana:
-    restart: always  
-    image: grafana/grafana:latest
-    ports:
-      - 3000:3000
-    volumes:
-    - grafana-data:/var/lib/grafana
-
   jaeger:
     image: jaegertracing/all-in-one:1.35
     container_name: jaeger
@@ -44,3 +25,4 @@ services:
     ports:
       - "5317-5318:4317-4318"
       - "16685-16686:16685-16686"
+
