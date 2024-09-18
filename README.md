@@ -119,8 +119,8 @@ Have a look at both the .yaml files in the oecc_agent folder of this repository 
 - Edit 'otagentpasoe.yaml' and add all the PASOE instances that you want to track
 - Do a similar thing for the databases
 
-So, we made sure that we are collecting metrics for those components we want to track, now we need to make sure that those metrics are sent somewhere that can make sense out of the data.
-
+So, we made sure that we are collecting metrics for those components we want to track, now we need to make sure that those metrics are sent to solutions that can make sense out of the data.
+There are many APM offerings as stated before, but as a commercial offering we are first using NewRelic today.
 
 ### Setting up NewRelic for collecting traces and metrics
 
@@ -134,6 +134,16 @@ So, we made sure that we are collecting metrics for those components we want to 
 
 - Use the insert key in the collector configuration file to receive the telemetry data in NewRelic  
 - Select the traces menu in the left side pane in NewRelic homepage, it will redirect to the traces page where you can see the trace information.
+
+### Configuring the OpenTelemetry Collector
+
+Since we are sending our metrics to the collector (or rather the collector collects them), the collector in turn will need to export the data to 3rd party solutions for all sorts of tasks.
+You will find examples of configuration files for the oTel Collector in the 'otel_collector' folder.
+
+For the first exercise, we only want to export the metrics to the NewRelic endpoint with your specific API KEY and further analyze the data from within NewRelic.
+
+> [!TIP]
+> Check the config.yaml file for an example of how to export to NewRelic from the oTel Collector
 
 ### Using an opensource stack
 
@@ -165,12 +175,20 @@ So, we made sure that we are collecting metrics for those components we want to 
 - Choose 'Save & Test'
 > You should receive acknowledgement that the Prometheus API was queried successfully
 
+We have now
+
 ## OpenTelemetry Tracing
 
 As discussed during the presentation, you can setup tracing for both ABL Clients and PASOE instances.
 For any ABL Client, we can add the *-otelConfig* parameter, followed by the file name that contains the OpenTelemetry configuration.
 
-In the *conf/tracing* folder of this project, you will find a sample configuration file that can be refered to in either the .pf file for an ABL Client or as a new option *otelConfigFile* in the openedge.properties file in the [AppServer.SessMgr] sections for PASOE.
+In the *conf/ablclient* and *conf/pasoe* folders of this project, you will find sample configuration files that can be refered to in either the .pf file for an ABL Client or as a new option *otelConfigFile* in the openedge.properties file in the [AppServer.SessMgr] sections for PASOE.
+
+#### Tasks
+
+- Configure both an ABL Client as one PASOE instance to enable tracing
+- As <endpoint>, you can use http://localhost:4317 when using the NewRelic setup, but if you are using the Docker compose stack you can use http://localhost:5317
+- 
 
 Open the [Jaeger UI](http://localhost:16686/).
 
