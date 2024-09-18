@@ -188,7 +188,8 @@ In the *conf/ablclient* and *conf/pasoe* folders of this project, you will find 
 
 - Configure both an ABL Client as one PASOE instance to enable tracing
 - As <endpoint>, you can use http://localhost:4317 when using the NewRelic setup, but if you are using the Docker compose stack you can use http://localhost:5317
-- 
+- In PDSOE you could set this up by creating a new project of type server, changing the startup parameters of the AVM for that project (include -otelConfig <filename>).
+- If you add a PASOE instance to the project in PDSOE, make sure to add/complete the otelConfigFile option to the openedge.properties file for the instance: note that it is part of the Session Manager configuration.
 
 Open the [Jaeger UI](http://localhost:16686/).
 
