@@ -225,7 +225,7 @@ There's a lot of things you can configure for the tracing as well:
 
 > [!TIP]
 > You can use wild cards while defining which procedures/classes will be traced.
-> It's also possible to use folder structures in this filter, check the [OE Docs]("https://docs.progress.com/bundle/openedge-abl-troubleshoot-applications/page/Sample-configuration-file.html") for more information on the possibilities
+> It's also possible to use folder structures in this filter, check the [OE Docs](https://docs.progress.com/bundle/openedge-abl-troubleshoot-applications/page/Sample-configuration-file.html) for more information on the possibilities
 
 
 #### Tasks
