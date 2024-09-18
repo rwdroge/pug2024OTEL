@@ -13,11 +13,11 @@ exporters:
     loglevel: debug
   file:
     path: c:\temp\export.json
-  otlp/elastic: 
-    endpoint: localhost:8200
-    compression: none
-    tls:
-        insecure: true
+ # otlp/elastic: 
+ #   endpoint: localhost:8200
+ #   compression: none
+ #   tls:
+ #      insecure: true
   otlp/relic:
     endpoint: otlp.eu01.nr-data.net:4318
     headers:
@@ -35,9 +35,8 @@ service:
   pipelines:
     traces:
       receivers: [otlp, otlp/withendpoint]
-#      exporters: [logging, otlp/elastic]
-      exporters: [logging, otlp/elastic, otlp/relic]
+      exporters: [logging, otlp/relic]
     metrics:
       receivers: [otlp, otlp/withendpoint]
-#      exporters: [logging, file, otlp/elastic]     
-      exporters: [logging, file, otlp/elastic, otlp/relic]
+
+      exporters: [logging, file, otlp/relic]

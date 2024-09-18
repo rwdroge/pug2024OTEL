@@ -28,7 +28,7 @@ Next to that, for your own excercises we decided to also use a combination of op
 Because setting up all of these products and their configurations is far outside of the scope of this workshop, we decided to use Docker (Compose) to compose all of these applications and have an easy way to stop and start all of those by a single command.
 
 > [!NOTE]
-> You can stop/start the whole 'OpenTelemetry stack' at any time with the following commands (executed on command line from the base directory of this workshop):  
+> You can stop/start the whole 'OpenTelemetry metrics stack' at any time with the following commands (executed on command line from the *grafana* folder of this workshop):  
 > **Stop**
 > ```
 > docker compose down -d
@@ -41,13 +41,30 @@ Because setting up all of these products and their configurations is far outside
 The Docker Compose command will start a full environment that has configured running instances of:
 
 - [oTel Collector](https://opentelemetry.io/docs/collector/) (the official OpenTelemetry Collector)
-- [Jaeger](https://www.jaegertracing.io/) (Distributed Tracing System)
--> http://localhost:16686
 - [Prometheus](https://prometheus.io/) (Monitoring system and time series database)
 - [Grafana](https://grafana.com/) (Observability platform: query, visualize and alert on metrics)
 -> http://localhost:3000 
 
+> [!NOTE]
+> You can also start an alternative for distributed tracing (executed on command line from the *jaeger* folder of this workshop):  
+> **Stop**
+> ```
+> docker compose down -d
+> ```
+> **Start**
+> ```
+> docker compose up -d
+> ```
+
+The Docker Compose command will start a full environment that has configured running instances of:
+
+- [oTel Collector](https://opentelemetry.io/docs/collector/) (the official OpenTelemetry Collector)
+- [Jaeger](https://www.jaegertracing.io/) 
+-> (https://localhost:16686)
+
 If you don't have docker and docker compose installed on your laptop, there will be short instructions (if you want to know more, RTFM :)) later on to just download and install the binaries for these solutions and make the whole stack run that way.
+
+Make sure to bring one stack down before using the other, because of possible port conflicts.
 
 ## Let's get it Started!
 
@@ -162,8 +179,7 @@ For the first exercise, we only want to export the metrics to the NewRelic endpo
 > prometheus
 >```
 
-(Or use the docker compose file to start the full stack with one command :))
-
+If you want to use the Docker stack for the metrics, do the following
 
 
 #### Tasks
@@ -187,8 +203,11 @@ In the *conf/ablclient* and *conf/pasoe* folders of this project, you will find 
 #### Tasks
 
 - Configure both an ABL Client as one PASOE instance to enable tracing
-- As <endpoint>, you can use http://localhost:4317 when using the NewRelic setup, but if you are using the Docker compose stack you can use http://localhost:5317
-- 
+- As <endpoint>, you can use http://localhost:4317 when using the NewRelic setup, but if you are using the Docker compose stack you can use http://localhost:5317 (I've mapped the container port to a different port related to port conflicts lcally)
+- In PDSOE you could set this up by creating a new project of type server, changing the startup parameters of the AVM for that project (include -otelConfig <filename>).
+- If you add a PASOE instance to the project in PDSOE, make sure to add/complete the otelConfigFile option to the openedge.properties file for the instance: note that it is part of the Session Manager configuration.
+- Now publish the pasoe procedure (src/pas/pasoe_span2.p) to your PASOE instance or place it in the 'openedge' directory
+- Open the client procedure (src/pas/call_pasoe.p) and RUN this using PDSOE or from within another client that has the -otelConfig parameter defined
 
 Open the [Jaeger UI](http://localhost:16686/).
 
@@ -215,3 +234,17 @@ Of course, it makes sense to do something similar for the ABL client OpenTelemet
 3. Rerun the requests from the ABL Client
 4. Check Jaeger again and compare with before to verify your changes
 
+There's a lot of things you can configure for the tracing as well:
+
+- Do I want to trace procedures or classes or both?
+- And if so, which classes/procedures do I want to trace?
+
+> [!TIP]
+> You can use wild cards while defining which procedures/classes will be traced.
+> It's also possible to use folder structures in this filter, check the [OE Docs](https://docs.progress.com/bundle/openedge-abl-troubleshoot-applications/page/Sample-configuration-file.html) for more information on the possibilities
+
+
+#### Tasks
+
+1. Take one of your own projects / your application and start collecting metrics
+2. Do the same for traces (maybe you already have a customer/user complaining about slowness in specific parts of the application, that would be a great place to start)
