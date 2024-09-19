@@ -3,9 +3,9 @@
 ## Your Workshop Environment
 
 This repository will contain all of the resources required to be able to perform all tasks.
-We have Windows environments in the cloud setup for you to use, you will receive connection information from your workshop hosts.
+We do have Windows environments in the cloud setup for you to use, you will receive connection information from your workshop hosts if you want to use those.
 
-If you want to perform this workshop on your own laptop, make sure to have at least installed:
+If you want to perform this workshop on your own laptop or VM, make sure to have at least installed:
 
 * OpenEdge 12.8.x (PASOE, Database, Client-Networking, PDSOE)
 * Docker (Desktop)
@@ -23,9 +23,9 @@ If you want to perform this workshop on your own laptop, make sure to have at le
 There are quite some APM (Application Performance Monitoring) offerings available on the market, both open source and commercialy.
 Today we will use the centralized cloud instance of NewRelic to capture your progress in today's workshop and metrics from all of your PASOE instances.
 
-Next to that, for your own excercises we decided to also use a combination of open source projects/products, all of them are at least included within the [CNCF](https://www.cncf.io/projects/) (Cloud Native Computing Foundation)  to collect, prepare and visualize the metrics and tracing data.
+Next to that, for your own excercises we decided to give you the option to also use a combination of open source projects/products, all of them are at least included within the [CNCF](https://www.cncf.io/projects/) (Cloud Native Computing Foundation)  to collect, prepare and visualize the metrics and tracing data.
 
-Because setting up all of these products and their configurations is far outside of the scope of this workshop, we decided to use Docker (Compose) to compose all of these applications and have an easy way to stop and start all of those by a single command.
+Because setting up all of these products and their configurations is far outside of the scope of this workshop, there is a way to use Docker (Compose) to compose all of these applications and have an easy way to stop and start all of those by a single command.
 
 > [!NOTE]
 > You can stop/start the whole 'OpenTelemetry metrics stack' at any time with the following commands (executed on command line from the *grafana* folder of this workshop):  
@@ -84,7 +84,7 @@ Make sure to bring one stack down before using the other, because of possible po
 
 We will start this workshop by collecting Metrics in the OpenTelemetry standard for both a PASOE instance and a RDBMS instance.
 As mentioned earlier during the presentation, we can use an OpenEdge Command Center Agent to do this for us.
-We don't need an OpenEdge Command Center Server installation for this to work, but we have configured one for you nonetheless.
+We don't need an OpenEdge Command Center Server installation for this to work, but you can install it nonetheless.
 
 The OpenEdge Command Center Agent can be installed using a silent or interactive installer, but it can also be deployed using a set of configuration files (i.e. ideal for Docker deployments). Today we will use the 'normal' Windows installation method. We've already downloaded the latest version from ESD for you and put that into the binaries folder.
 
@@ -100,7 +100,7 @@ You can create and export an Agent key from the [Command Center Console](https:/
 Now that we have our Agent key file that contains the secret and server configuration details, it's time to go ahead with the installation of the Command Center Agent!
 
 #### Tasks:
-> only when using OpenEdge Command Center Server
+> This first step is only required when using OpenEdge Command Center Server
 1. Create and download an Agent Key file that you can use during the OpenEdge Command Center Agent installation
 2. Start the OpenEdge Command Center Agent Installer (PROGRESS_OECC_AGENT_1.3.0_WIN_64.exe)
 3. Click **Next** in the Introduction section
@@ -132,25 +132,27 @@ Have a look at both the .yaml files in the oecc_agent folder of this repository 
 
 #### Tasks:
 
-- Decide which PASOE instances and databases you want to start collecting metrics for
-- Edit 'otagentpasoe.yaml' and add all the PASOE instances that you want to track
-- Do a similar thing for the databases
+1. Stop the OECC Agent if it's running 
+2. Decide which PASOE instances and databases you want to start collecting metrics for
+3. Edit 'otagentpasoe.yaml' and add all the PASOE instances that you want to track
+4. Do a similar thing for the databases
 
 So, we made sure that we are collecting metrics for those components we want to track, now we need to make sure that those metrics are sent to solutions that can make sense out of the data.
 There are many APM offerings as stated before, but as a commercial offering we are first using NewRelic today.
 
 ### Setting up NewRelic for collecting traces and metrics
 
-- Create a user account in NewRelic https://newrelic.com/ 
-- Login to the account and create an insert API key  
-- Click on the username link in the bottom left corner. It will show "API Keys" link 
-- Click on "API Keys" link to navigate to API keys page 
-- Click on "Insights insert keys" link right side options pane  
-- Click on the plus icon next to the Insert Keys heading 
-- Give a short description of the key and click on the "Save Your Notes" button to create insert API key 
+1. Create a user account in NewRelic https://newrelic.com/ 
+2. Login to the account and create an insert API key  
+3. Click on the username link in the bottom left corner. It will show "API Keys" link 
+4. Click on "API Keys" link to navigate to API keys page 
+5. Click on "Insights insert keys" link right side options pane  
+6. Click on the plus icon next to the Insert Keys heading 
+7. Give a short description of the key and click on the "Save Your Notes" button to create insert API key 
 
-- Use the insert key in the collector configuration file to receive the telemetry data in NewRelic  
-- Select the traces menu in the left side pane in NewRelic homepage, it will redirect to the traces page where you can see the trace information.
+8. Use the insert key in the collector configuration file to receive the telemetry data in NewRelic  
+9. Start the OECC Agent
+
 
 ### Configuring the OpenTelemetry Collector
 
@@ -162,16 +164,19 @@ For the first exercise, we only want to export the metrics to the NewRelic endpo
 > [!TIP]
 > Check the config.yaml file for an example of how to export to NewRelic from the oTel Collector
 
+
+
 ### Using an opensource stack
 
 #### Tasks
+
 - Download and install Grafana
 > Grafana should be running after installation, otherwise you can start/stop it as Windows Service
  
 - Download and install Jaeger
 - Start  jaeger
 >```
->
+> jaeger-all-in-one
 > ```
 - Download and install Prometheus
 - Start Prometheus (from installation directory, it uses the prometheus.yaml file for configuration)
@@ -179,20 +184,30 @@ For the first exercise, we only want to export the metrics to the NewRelic endpo
 > prometheus
 >```
 
-If you want to use the Docker stack for the metrics, do the following
-
+You can find
 
 #### Tasks
 
 - Open Grafana (http://localhost:3000) and login
 - In the left-side menu choose 'Data sources'
 - Add Data source of type 'Prometheus'
-- Enter the Prometheus URL (http://localhost:9090)
+- Enter the Prometheus URL (http://localhost:9090) or (http://prometheus:9090 when using the container stack)
 - Choose 'Save & Test'
 > You should receive acknowledgement that the Prometheus API was queried successfully
 
-We have now
+We have now a working connection between Grafana and Prometheus, now it's time to visualize the data.
+You can do so by going to the data sources and selecting the Prometheus data source, it will offer you the possibility to start building a dashboard for that data source.
 
+Luckily we have already prepared an example of such a dashboard for you to import
+
+#### Tasks
+
+1. In Grafana choose Dashboards / Import on the side bar
+2.  Copy and paste the text of a sample OpenEdge Dashboard (grafana/openedge-dashboard.json) into the “Import via panel json” editor.
+3. Click on Load.
+4. Click on Import.
+
+You should now have a working dashboard.
 ## OpenTelemetry Tracing
 
 As discussed during the presentation, you can setup tracing for both ABL Clients and PASOE instances.
@@ -207,7 +222,7 @@ In the *conf/ablclient* and *conf/pasoe* folders of this project, you will find 
 - In PDSOE you could set this up by creating a new project of type server, changing the startup parameters of the AVM for that project (include -otelConfig <filename>).
 - If you add a PASOE instance to the project in PDSOE, make sure to add/complete the otelConfigFile option to the openedge.properties file for the instance: note that it is part of the Session Manager configuration.
 - Now publish the pasoe procedure (src/pas/pasoe_span2.p) to your PASOE instance or place it in the 'openedge' directory
-- Open the client procedure (src/pas/call_pasoe.p) and RUN this using PDSOE or from within another client that has the -otelConfig parameter defined
+- Open the client procedure (src/client/call_pasoe.p) and RUN this using PDSOE or from within another client that has the -otelConfig parameter defined
 
 Open the [Jaeger UI](http://localhost:16686/).
 
@@ -246,5 +261,10 @@ There's a lot of things you can configure for the tracing as well:
 
 #### Tasks
 
-1. Take one of your own projects / your application and start collecting metrics
-2. Do the same for traces (maybe you already have a customer/user complaining about slowness in specific parts of the application, that would be a great place to start)
+
+1. Change the oTel Collector back (config.yaml) to use NewRelic endpoints for tracing and metrics
+2. Select the traces menu in the left side pane in NewRelic homepage, it will redirect to the traces page where you can see the trace information.
+
+#### Tasks that we would love to see :)
+1. Take one of your own real-life projects / your application and start collecting metrics
+3. Do the same for traces (maybe you already have a customer/user complaining about slowness in specific parts of the application, that would be a great place to start)
