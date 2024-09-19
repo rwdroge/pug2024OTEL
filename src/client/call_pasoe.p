@@ -7,7 +7,7 @@ retok = happ:CONNECT("-URL http://localhost:8810/apsv", "" , "").
 
 MESSAGE retok
     VIEW-AS ALERT-BOX INFORMATION BUTTONS OK.
-
+                                              
 RUN procinterne.
     
 RUN pasoe_span2.p ON happ.
