@@ -110,7 +110,7 @@ It uses the config.yaml file by default that is placed next to it.
 ## OpenTelemetry Tracing
 
 As discussed during the presentation, you can setup tracing for both ABL Clients and PASOE instances.
-For any ABL Client, we can add the *-otelConfig* parameter, followed by the file name that contains the OpenTelemetry configuration.
+For any ABL Client, we can add the *-otelconfig* parameter, followed by the file name that contains the OpenTelemetry configuration.
 
 In the *conf/ablclient* and *conf/pasoe* folders of this project, you will find sample configuration files that can be refered to in either the .pf file for an ABL Client or as a new option *otelConfigFile* in the openedge.properties file in the [AppServer.SessMgr] sections for PASOE.
 
@@ -118,10 +118,10 @@ In the *conf/ablclient* and *conf/pasoe* folders of this project, you will find 
 
 1. Configure both an ABL Client as one PASOE instance to enable tracing
 2. As <endpoint>, you can use http://localhost:4317 
-3. In PDSOE you could set this up by creating a new project of type server, changing the startup parameters of the AVM for that project (include -otelConfig <filename>).
+3. In PDSOE you could set this up by creating a new project of type server, changing the startup parameters of the AVM for that project (include -otelconfig <filename>).
 4. If you add a PASOE instance to the project in PDSOE, make sure to add/complete the otelConfigFile option to the openedge.properties file for the instance: note that it is part of the Session Manager configuration.
 5. Now publish the pasoe procedure (src/pas/pasoe_span2.p) to your PASOE instance or place it in the 'openedge' directory
-6. Open the client procedure (src/client/call_pasoe.p) and RUN this using PDSOE or from within another client that has the -otelConfig parameter defined
+6. Open the client procedure (src/client/call_pasoe.p) and RUN this using PDSOE or from within another client that has the -otelconfig parameter defined
 
 Open the [Jaeger UI](http://localhost:16686/).
 
