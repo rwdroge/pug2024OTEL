@@ -117,7 +117,7 @@ In the *conf/ablclient* and *conf/pasoe* folders of this project, you will find 
 #### Tasks
 
 1. Configure both an ABL Client as one PASOE instance to enable tracing
-2. As <endpoint>, you can use http://localhost:4317 
+2. Replace the endpoint in the otelConfig.json file with http://localhost:4317 
 3. In PDSOE you could set this up by creating a new project of type server, changing the startup parameters of the AVM for that project (include -otelconfig <filename>).
 4. If you add a PASOE instance to the project in PDSOE, make sure to add/complete the otelConfigFile option to the openedge.properties file for the instance: note that it is part of the Session Manager configuration.
 5. Now publish the pasoe procedure (src/pas/pasoe_span2.p) to your PASOE instance or place it in the 'openedge' directory
