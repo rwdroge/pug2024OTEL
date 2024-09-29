@@ -113,11 +113,22 @@ As discussed during the presentation, you can setup tracing for both ABL Clients
 For any ABL Client, we can add the *-otelconfig* parameter, followed by the file name that contains the OpenTelemetry configuration.
 
 In the *conf/ablclient* and *conf/pasoe* folders of this project, you will find sample configuration files that can be refered to in either the .pf file for an ABL Client or as a new option *otelConfigFile* in the openedge.properties file in the [AppServer.SessMgr] sections for PASOE.
+In this workshop you can decide to send your tracing to either NewRelic or to Jaeger. The Jaeger-all-in-one.exe contains a built-in OpenTelemetry Collector, so we don't have to run a seperate one.
+
+If you don't have Jaeger installed / running you can do that by downloading the executable for your platform and use the following command to start Jaeger:
+
+> ```
+> cd c:\<jaeger_dir>
+> ```
+
+> ```
+> jaeger-all-in-one
+> ```
 
 #### Tasks
 
 1. Configure both an ABL Client as one PASOE instance to enable tracing
-2. As <endpoint>, you can use http://localhost:4317 
+2. Replace the endpoint in the otelConfig.json file with http://localhost:4317 for sending the traces to Jaeger, for NewRelic, replace the API key with the key you have received when registering for NewRelic.
 3. In PDSOE you could set this up by creating a new project of type server, changing the startup parameters of the AVM for that project (include -otelconfig <filename>).
 4. If you add a PASOE instance to the project in PDSOE, make sure to add/complete the otelConfigFile option to the openedge.properties file for the instance: note that it is part of the Session Manager configuration.
 5. Now publish the pasoe procedure (src/pas/pasoe_span2.p) to your PASOE instance or place it in the 'openedge' directory
@@ -227,6 +238,8 @@ There are many APM offerings as stated before, but as a commercial offering we a
 
 #### Tasks (if you don't use Docker)
 
+Let's stop Jaeger first if you still have that running (by closing the CMD window), since it has a built-in otel collector running on port 4317, it will result in port conflicts when we try to run a seperate instance of the oTel Collector.
+
 1. Download and install Grafana
 > Grafana should be running after installation, otherwise you can start/stop it as Windows Service
 2. - Download and install Prometheus
@@ -240,6 +253,7 @@ There are many APM offerings as stated before, but as a commercial offering we a
 5. Add Data source of type 'Prometheus'
 6. Enter the Prometheus URL (http://localhost:9090) or (http://prometheus:9090 when using the container stack)
 7. Choose 'Save & Test'
+
 > You should receive acknowledgement that the Prometheus API was queried successfully
 
 We have now a working connection between Grafana and Prometheus, now it's time to visualize the data.
@@ -250,11 +264,11 @@ Luckily we have already prepared an example of such a dashboard for you to impor
 #### Tasks
 
 1. In Grafana choose Dashboards / Import on the side bar
-2.  Copy and paste the text of a sample OpenEdge Dashboard (grafana/openedge-dashboard.json) into the “Import via panel json” editor.
+2. Copy and paste the text of a sample OpenEdge Dashboard (grafana/openedge-dashboard.json) into the “Import via panel json” editor.
 3. Click on Load.
 4. Click on Import.
 
-You should now have a working dashboard.
+You should now have a working dashboard and if setup correctly get metrics from the PASOE and OE RDBMS instances that you have configured.
 
 #### Tasks that we would love to see :)
 1. Take one of your own real-life projects / your application and start collecting metrics
